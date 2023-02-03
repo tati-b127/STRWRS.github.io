@@ -390,6 +390,7 @@ color: #fff;
     }
     .footer__list {
         justify-content: space-between;
+        flex-wrap: wrap;
     }
     .footer__item:not(:last-child) {
         margin-right: 16px;
@@ -403,5 +404,18 @@ color: #fff;
     }
     .menu {
         padding-bottom: 200px;
+    }
+}
+@media (max-width: 480px) {
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .footer {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .menu {
+        padding-bottom: 160px;
     }
 }

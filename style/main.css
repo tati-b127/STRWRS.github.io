@@ -439,11 +439,8 @@ color: #fff;
 }
 
 .section__item {
-    max-width: 100px;
+    max-width: min-content;
     margin-bottom: 16px;
-}
-
-.section__item:not(:last-child) {
     margin-right: 50px;
 }
 
@@ -569,6 +566,9 @@ color: #fff;
     .menu {
         padding-bottom: 200px;
     }
+    .section__item {
+        margin-right: 32px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -584,5 +584,21 @@ color: #fff;
 
     .menu {
         padding-bottom: 160px;
+    }
+    /* .section__item:not(:last-child) {
+        margin-right: 30px;
+    } */
+    .section__item {
+        margin-right: 20px;
+    }
+    .section__img {
+        height: 90px;
+    }
+    .section__name {
+        max-width: 80px;
+    }
+    .episode__section:last-child img {
+        height: 80px;
+        width: 80px;
     }
 }

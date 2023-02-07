@@ -34,7 +34,7 @@ mainContainer.before(header);
 function renderPage(moduleName, apiURL, css, container) {
   Promise.all([moduleName, apiURL, css].map((src) => loadResource(src))).then(
     ([pageModule, data]) => {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      // window.scrollTo({ top: 0, behavior: 'smooth' })
       console.log('load....');
       preloaderView.classList.add('visible');
       container.innerHTML = '';

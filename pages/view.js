@@ -16,7 +16,7 @@ export function createLinkItem(title, itemId, episodeId) {
     cardLink.href = `?filmId=${itemId}`;
     //proverit ssilky
     cardLink.addEventListener('click', function (e) {
-        e.preventDefault();
+        // e.preventDefault();
         let state = { 'filmId': itemId };
         history.pushState(state, '', `index.html?filmId=${itemId}`)
         changeRender()
@@ -57,7 +57,7 @@ export function createFooterItemLink(item, episodeId) {
     footerLink.textContent = `Episode ${episodeId}`;
     footerLink.href = `?filmId=${item}`;
     footerLink.addEventListener('click', (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         let state = { 'filmId': item };
         history.pushState(state, '', `index.html?filmId=${item}`)
         changeRender()
@@ -90,7 +90,7 @@ export function createDetails(title, episodeId, director, producer, date, openin
     linkBack.href = 'index.html'
     linkBack.textContent = 'BACK TO EPISODES'
     linkBack.addEventListener('click', (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         history.pushState(null, '', 'index.html')
         changeRender()
     })

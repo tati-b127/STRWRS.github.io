@@ -1,5 +1,5 @@
-import { createHeader } from "./header.js";
-// import { createFooter } from './footer.js';
+import { createHeader } from "./components/header.js";
+import { preloader } from "./components/preloader.js";
 
 const cssPromises = {};
 
@@ -24,66 +24,57 @@ function loadResource(src) {
   //server
   return fetch(src).then((res) => res.json());
 }
-const searchParams = new URLSearchParams(location.search);
-const filmId = searchParams.get("filmId");
-console.log(filmId);
+const preloaderView = preloader()
 const mainContainer = document.getElementById("main");
 const footer = document.getElementById("footer");
 let header = createHeader();
-// let footer = createFooter()
+document.body.append(preloaderView)
 mainContainer.before(header);
-// mainContainer.after(footer)
 
 function renderPage(moduleName, apiURL, css, container) {
   Promise.all([moduleName, apiURL, css].map((src) => loadResource(src))).then(
     ([pageModule, data]) => {
-      console.log(container);
-      // if (container === mainContainer) {
-      //     mainContainer.innerHTML = ''
-      // }
+      console.log('load....');
+      preloaderView.classList.add('visible');
+      container.innerHTML = '';
       container.append(pageModule.render(data));
+      console.log('complete loading...')
+      preloaderView.classList.remove('visible');
     }
   );
 }
+export function changeRender() {
+  const searchParams = new URLSearchParams(location.search);
+  const filmId = searchParams.get("filmId");
+  console.log(filmId);
 
-if (!filmId) {
-  renderPage(
-    "./footer.js",
-    // 'https://swapi.dev/api/',
-    "https://swapi.dev/api/films",
-    "./main.css",
-    footer
-  );
-  renderPage(
-    "./main-page.js",
-    // 'https://swapi.dev/api/',
-    "https://swapi.dev/api/films",
-    "./main.css",
-    mainContainer
-  );
-} else {
-  renderPage(
-    "./footer.js",
-    // 'https://swapi.dev/api/',
-    "https://swapi.dev/api/films",
-    "./main.css",
-    footer
-  );
-  renderPage(
-    "./details.js",
-    // 'https://swapi.dev/api/',
-    `https://swapi.dev/api/films/${filmId}`,
-    "./main.css",
-    mainContainer
-  );
+  if (!filmId) {
+    renderPage(
+      "./components/footer.js",
+      "https://swapi.dev/api/films",
+      "./style/main.css",
+      footer
+    );
+    renderPage(
+      "./pages/main-page.js",
+      "https://swapi.dev/api/films",
+      "./style/main.css",
+      mainContainer
+    );
+  } else {
+    renderPage(
+      "./components/footer.js",
+      "https://swapi.dev/api/films",
+      "./style/main.css",
+      footer
+    );
+    renderPage(
+      "./pages/details.js",
+      `https://swapi.dev/api/films/${filmId}`,
+      "./style/main.css",
+      mainContainer
+    );
+  }
 }
-//отмена перезагрузки
-
-let allLinks = document.querySelectorAll('a')
-console.log(allLinks)
-allLinks.forEach(link  => {
-    console.log(link)
-    link.addEventListener('click', e => {
-        e.preventDefault()
-    })
-})
+changeRender()
+window.addEventListener('popstate', changeRender)

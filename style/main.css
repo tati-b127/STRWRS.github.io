@@ -457,13 +457,12 @@ color: #fff;
     width: auto;
     margin-bottom: 8px;
     transform: scale(1, 1);
-    transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
-/* .section__img:hover {
-    transform: scale(0.5. 0.5);
-    height: 100px;
-} */
+.section__img:hover {
+    transform: scale(1.2, 1.2);
+}
 .episode__section:last-child img {
     height: 80px;
     width: 80px;
